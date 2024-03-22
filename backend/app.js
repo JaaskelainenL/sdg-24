@@ -83,7 +83,6 @@ app.get('/reports', (req, res) => {
 
 app.post('/create/', (req, res) => {
 
-  console.log(req.body);
 
   if (req.body.msg === undefined || req.body.msg.length == 0) {
     return res.status(400);
@@ -106,15 +105,38 @@ app.post('/create/', (req, res) => {
 
   let lng = parseFloat(req.body.gps_lng);
 
-  console.log("paesd");
 
   db.run(`INSERT INTO reports (msg, gps_lat, gps_lng) VALUES (?, ?, ?)`, [msg, lat, lng], function(err) {
     if (err) {
         return res.status(500);
     }
-    console.log("insert");
 
     return res.status(200).json({insertID:this.lastID});
+  });
+
+
+  return res.status(500);
+
+});
+
+
+app.post('/fix/', (req, res) => {
+
+  console.log(req.body);
+
+  if (req.body.id === undefined || isNaN(req.body.id)) {
+    return res.status(400);
+  }
+
+  let id = req.body.id;
+
+  db.run(`UPDATE reports SET fixed=CURRENT_TIMESTAMP WHERE rowid=?;`, [id], function(err) {
+    if (err) {
+        return res.status(500);
+    }
+
+
+    return res.status(200).json({"fixed":true});
   });
 
 
