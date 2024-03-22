@@ -1,24 +1,41 @@
-
-
-
 export default async function Home() {
-
-  const msg = await backendHello();
-
+  const data: Reports = await backendHello();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-      <h1>Server says:</h1>
-      <p>{msg.message}</p>
+    <main>
+      <div className="title">
+        <h1 className="centerText">insert title</h1>
+      </div>
+      <div>
+        {
+          data?.reports?.map(item => {
+            return (
+              <div className="messageContainer">
+                <p className="centerText">{item.id}</p>
+                <p className="centerText">{item.msg}</p>
+                <p className="centerText">{item.created}</p>
+              </div>
+            )
+          })
+        }
       </div>
     </main>
   );
 }
 
-async function backendHello(){
-  const response = await fetch("http://localhost:3001/");
+type Reports = {
+  reports: {
+    id: number,
+    msg: string,
+    created: string,
+    fixed: string,
+    gps_lat: number,
+    gps_lng: number
+  }[]
+}
 
-  return response.json();
+async function backendHello() {
+  const response = await fetch("http://localhost:3001/reports?limit=10&offset=0");
+  const data = await response.json();
+  return data;
 }
