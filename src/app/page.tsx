@@ -9,11 +9,13 @@ export default async function Home() {
       <div>
         {
           data?.reports?.map(item => {
+            const fixedElem = item.fixed ? (<p className="centerText">FIXED!!! 🥳🥳🥳</p>) : null;
+            const created = new Date(item.created);
             return (
               <div className="messageContainer">
-                <p className="centerText">{item.id}</p>
+                <p className="timeText">{created.toLocaleTimeString("Finland")}</p>
                 <p className="centerText">{item.msg}</p>
-                <p className="centerText">{item.created}</p>
+                {fixedElem}
               </div>
             )
           })
@@ -35,7 +37,7 @@ type Reports = {
 }
 
 async function backendHello() {
-  const response = await fetch("http://localhost:3001/reports?limit=10&offset=0");
+  const response = await fetch("http://localhost:3001/reports?limit=20&offset=0");
   const data = await response.json();
   return data;
 }
