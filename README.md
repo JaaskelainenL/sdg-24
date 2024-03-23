@@ -18,3 +18,6 @@ npm run db-init
 
 
 The site launches at: [http://localhost:3000](http://localhost:3000).
+
+
+The git-repo includes a dummy database with some data and an administrator account admin (password: admin).
