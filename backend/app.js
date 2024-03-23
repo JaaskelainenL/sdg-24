@@ -129,8 +129,6 @@ app.post('/create/', (req, res) => {
 app.post('/fix/', (req, res) => {
 
 
-  if(!checkLoggedIn)
-    return res.status(400);
 
   if (req.body.id === undefined || isNaN(req.body.id)) {
     return res.status(400);

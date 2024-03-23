@@ -4,6 +4,7 @@ import { logout, fetchIssues } from '@/app/lib/actions';
 import React from 'react';
 import { Reports } from '@/app/lib/definitions';
 import './admin.css';
+import AdminList from '@/app/ui/admin-view';
 
 
 export default async function Home() {
@@ -27,19 +28,7 @@ export default async function Home() {
         </form>
       </div>
       <div>
-      {
-          data?.reports?.map(item => {
-            const fixedElem = item.fixed ? (<p className="fixedElem">FIXED!!! 🥳🥳🥳</p>) : null;
-            const created = new Date(item.created);
-            return (
-              <div className="messageContainer">
-                <p className="timeText">{created.toLocaleTimeString("Finland")}</p>
-                <p className="scrollableText">{item.msg}</p>
-                {fixedElem}
-              </div>
-            )
-          })
-        }
+        <AdminList data={data}/>
       </div>
     </main>
   );

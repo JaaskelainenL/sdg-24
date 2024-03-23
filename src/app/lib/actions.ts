@@ -32,6 +32,31 @@ export async function logout(){
 
 }
 
+export async function fix(id: number){
+  
+  const res = await fetch(process.env.backend+'/fix', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({id: id})
+});
+
+  const data = await res.json();
+
+
+
+  if(data.fixed){
+
+      return true;
+  }
+
+
+  return false;
+
+}
+
 
 export async function fetchIssues() {
   const response = await fetch(process.env.backend+"/reports?limit=20&offset=0");
