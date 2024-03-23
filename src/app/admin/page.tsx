@@ -3,7 +3,7 @@ import { auth } from '$/auth';
 import { logout, fetchIssues } from '@/app/lib/actions';
 import React from 'react';
 import { Reports } from '@/app/lib/definitions';
-
+import './admin.css';
 
 
 export default async function Home() {
@@ -21,23 +21,20 @@ export default async function Home() {
       <form
           action={logout}
         >
-          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-            <div className="hidden md:block">Sign Out</div>
+          <button className="signout">
+            <div className="hidden md:block">Sign out</div>
           </button>
         </form>
       </div>
       <div>
-        {
+      {
           data?.reports?.map(item => {
-            const fixedElem = item.fixed ? (<p className="centerText">FIXED!!! 🥳🥳🥳</p>) : null;
+            const fixedElem = item.fixed ? (<p className="fixedElem">FIXED!!! 🥳🥳🥳</p>) : null;
             const created = new Date(item.created);
             return (
               <div className="messageContainer">
                 <p className="timeText">{created.toLocaleTimeString("Finland")}</p>
-                <p className="centerText">{item.msg}</p>
-
-  
-
+                <p className="scrollableText">{item.msg}</p>
                 {fixedElem}
               </div>
             )

@@ -1,0 +1,56 @@
+body{
+    overflow:hidden;
+    color:white;
+} 
+
+h1{
+    text-align: center;
+}
+
+input{
+  border-radius: 10px;
+  border: none;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  color:black
+}
+
+
+button{
+  padding: 10px;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  transition: all 0.3s ease-out;
+  background-color: white;
+}
+
+button:hover{
+    background-color: #ffffff70;
+}
+
+
+form{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+
+form > div{
+  padding: 30px;
+  background: #ffffff70;
+  border-radius: 10px;
+}
+
+form > div > div{
+    margin: 25px;
+    margin-bottom:10px;
+}

@@ -1,0 +1,14 @@
+.signout{
+    position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: white;
+  border: none;
+  transition: all 0.3s ease-out;
+} 
+
+.signout:hover {
+    background: lightgray;
+}
