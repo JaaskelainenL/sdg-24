@@ -24,6 +24,25 @@ export async function authenticate(
     }
   }
 
+  
+export async function uploadReport(
+  prevState: void | undefined,
+  formData: FormData,
+) {
+  const res = await fetch(process.env.backend + '/create/', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      msg: formData.get('msg'),
+      gps_lat: 0,
+      gps_lng: 0
+    })
+  });
+  console.log(res.json());
+};
 
 
 export async function logout(){
