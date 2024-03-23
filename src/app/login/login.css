@@ -47,7 +47,9 @@ form{
 form > div{
   padding: 30px;
   background: #ffffff70;
-  border-radius: 10px;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  
 }
 
 form > div > div{
