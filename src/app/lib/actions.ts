@@ -42,6 +42,7 @@ export async function uploadReport(
     })
   });
   console.log(res.json());
+  
 };
 
 

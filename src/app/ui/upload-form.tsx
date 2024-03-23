@@ -19,9 +19,11 @@ export default function UploadForm() {
         <div className="w-full">
           <div>
             <div className="">
-              <input
+              <textarea
                 className=""
                 id="msg"
+                rows={10}
+                maxLength={2000}
                 type="msg"
                 name="msg"
                 placeholder="Content"
