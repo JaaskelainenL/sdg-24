@@ -1,5 +1,10 @@
+import { fetchIssues } from '@/app/lib/actions';
+import { Reports } from '@/app/lib/definitions';
+
+
+
 export default async function Home() {
-  const data: Reports = await backendHello();
+  const data: Reports = await fetchIssues();
 
   return (
     <main>
@@ -23,21 +28,4 @@ export default async function Home() {
       </div>
     </main>
   );
-}
-
-type Reports = {
-  reports: {
-    id: number,
-    msg: string,
-    created: string,
-    fixed: string,
-    gps_lat: number,
-    gps_lng: number
-  }[]
-}
-
-async function backendHello() {
-  const response = await fetch("http://localhost:3001/reports?limit=20&offset=0");
-  const data = await response.json();
-  return data;
 }
