@@ -24,7 +24,6 @@ export default function UploadForm() {
                 id="msg"
                 rows={10}
                 maxLength={2000}
-                type="msg"
                 name="msg"
                 placeholder="Content"
                 required

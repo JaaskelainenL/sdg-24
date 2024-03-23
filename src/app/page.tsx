@@ -9,7 +9,9 @@ export default async function Home() {
   return (
     <main>
       <div className="title">
-        <h1 className="centerText">insert title</h1>
+        <h1 className="centerText">
+          <a href="/upload">Reports</a>
+        </h1>
       </div>
       <div>
         {
