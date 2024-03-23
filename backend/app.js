@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const port = 3001;
 const sqlite3 = require('sqlite3');
-
+const bcrypt = require('bcrypt');
 
 
 // Init database
@@ -17,9 +17,15 @@ const db = new sqlite3.Database('backend/database.sqlite', (err) => {
 
 
 
+
 // Routing
 app.use(cors());
 app.use(express.json());
+
+
+
+
+
 
 app.get('/', (req, res) => {
   return res.status(200).json({message:"helloo frontend"});
@@ -122,7 +128,9 @@ app.post('/create/', (req, res) => {
 
 app.post('/fix/', (req, res) => {
 
-  console.log(req.body);
+
+  if(!checkLoggedIn)
+    return res.status(400);
 
   if (req.body.id === undefined || isNaN(req.body.id)) {
     return res.status(400);
@@ -143,6 +151,69 @@ app.post('/fix/', (req, res) => {
   return res.status(500);
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ADMIN STUFF
+
+// LOGIN
+app.post('/login/', (req, res) => {
+
+
+  if (req.body.user === undefined || req.body.user.length == 0) {
+    return res.status(400);
+  }
+
+  if (req.body.pass === undefined || req.body.pass.length == 0) {
+    return res.status(400);
+  }
+
+  var user = req.body.user;
+  var password = req.body.pass;
+
+  db.all(`SELECT name, hash FROM users WHERE name = ? LIMIT 1;`, [user], function(err,rows) {
+    if (err) {
+        return res.status(500);
+    }
+
+    console.log(rows);
+
+    rows.forEach((row) => {
+
+      bcrypt.compare(password, row.hash, (err, result) => {
+        if (err) {
+            return res.status(500);
+          } else if (result) {
+            // Passwords match, start a session for the user
+            return res.status(200).json({ok:true, name:row.name, role:row.role });
+        } else {
+          return res.status(500);
+        }
+    });
+
+    });
+
+
+    return res.status(500);
+  });
+
+
+  return res.status(500);
+
+});
+
 
 
 
